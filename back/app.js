@@ -5,6 +5,14 @@ var port = process.env.PORT || 4201;
 
 var app = express();
 
+//RUTAS
+var user_routes = require('./routes/user');
+
+var categoria_routes = require('./routes/categoria');
+
+var producto_routes = require('./routes/producto');
+
+
 mongoose.connect('mongodb://localhost:27017/sistema',{useUnifiedTopology: true, useNewUrlParser: true},(err,res)=> {
     if (err){
         throw err;
@@ -18,5 +26,9 @@ mongoose.connect('mongodb://localhost:27017/sistema',{useUnifiedTopology: true, 
 
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
+
+app.use('/api',user_routes);
+app.use('/api',categoria_routes);
+app.use('/api',producto_routes);
 
 module.exports = app;
