@@ -1,4 +1,5 @@
 var Producto = require('../models/producto');
+var fs = require('fs')
 
 function registrar(req,res){
     var data = req.body;
@@ -77,7 +78,126 @@ function listar (req,res){
     })
 }
 
+function editar(req,res){
+    var id = req.params['id'];
+    var img = req.params['img'];
+    var data = req.body;
+
+    if (req.files)
+    {
+        fs.unlink('./uploads/productos/'+img,(err)=>{
+            if(err){
+                throw err;
+            }
+        }
+        )
+        var imagen_path = req.files.imagen.path;
+        var name = imagen_path.split('\\');
+        var name_imagen = name[2]
+        Producto.findByIdAndUpdate({_id: id},{
+        titulo: data.titulo,
+        descripcion: data.descripcion,
+        imagen: name_imagen,
+        precio_compra: data.precio_compra,
+        precio_venta: data.precio_venta,
+        stock: data.stock,
+        idCategoria: data.idCategoria,
+        puntos: data.puntos
+    },(err,producto_edited)=>{
+        if (err){
+            res.status(500).send({message: 'Error en el servidor'});
+        }else{
+            if(producto_edited){
+                res.status(200).send({producto: producto_edited});
+            }else{
+                res.status(403).send({message: 'No se pudo editar el producto.'})
+            }
+        }
+    })
+    }else{
+        Producto.findByIdAndUpdate({_id: id},{
+            titulo: data.titulo,
+            descripcion: data.descripcion,
+            precio_compra: data.precio_compra,
+            precio_venta: data.precio_venta,
+            stock: data.stock,
+            idCategoria: data.idCategoria,
+            puntos: data.puntos
+        },(err,producto_edited)=>{
+            if (err){
+                res.status(500).send({message: 'Error en el servidor'});
+            }else{
+                if(producto_edited){
+                    res.status(200).send({producto: producto_edited});
+                }else{
+                    res.status(403).send({message: 'No se pudo editar el producto.'})
+                }
+            }
+        })
+    }
+}
+
+function obtener_producto (req,res){
+    var id = req.params['id'];
+    console.log(id)
+
+    Producto.findById({_id: id},(err,producto_data)=>{
+        if (err){
+            res.status(500).send({message: 'Error en el servidor'});
+        }else{
+            if(producto_data){
+                res.status(200).send({producto: producto_data});
+            }else{
+                res.status(403).send({message: 'no hay ningun registro con ese id'})
+            }
+        }
+    })
+}
+
+function eliminar (req,res){
+    var id = req.params['id']
+
+    Producto.findByIdAndRemove({_id: id},(err,producto_deleted)=>{
+            if (err){
+                res.status(500).send({message: 'Error en el servidor'});
+            }else{
+                if(producto_deleted){
+                    fs.unlink('./uploads/productos/'+producto_deleted.imagen,(err)=>{
+                        if(err){
+                            throw err;
+                        }
+                    }
+                    )
+                    res.status(200).send({producto: producto_deleted});
+                }else{
+                    res.status(403).send({message: 'No se pudo eliminar el producto.'})
+                }
+            }
+    });
+}
+
+function update_stock(req,res){
+    var id= req.params['id'];
+    var data = req.body;
+
+    Producto.findById({_id: id},(err,producto_data)=>{
+        if(producto_data){
+            Producto.findByIdAndUpdate(id,{stock: parseInt(producto_data.stock)+parseInt(data.stock)},(err,producto_edited)=>{
+                if(producto_edited){
+                    res.status(200).send({producto: producto_edited});
+                }else{
+                    res.status(500).send(err);
+                }
+            })
+        }
+    })
+
+}
 module.exports = {
     registrar,
     listar,
+    editar,
+    obtener_producto,
+    eliminar,
+    update_stock,
 }

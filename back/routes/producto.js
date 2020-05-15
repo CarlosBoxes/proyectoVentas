@@ -7,5 +7,9 @@ var api = express.Router();
 
 api.post('/producto/registrar',path,ProductoController.registrar);
 api.get('/productos/:titulo?',ProductoController.listar);
+api.put('/producto/editar/:id/:img',path,ProductoController.editar);
+api.get('/producto/registro/:id',ProductoController.obtener_producto);
+api.delete('/producto/:id',path,ProductoController.eliminar);
+api.put('/producto/stock/:id',path,ProductoController.update_stock);
 
 module.exports = api;
