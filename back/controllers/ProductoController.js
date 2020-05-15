@@ -1,4 +1,5 @@
 var Producto = require('../models/producto');
+var path = require('path')
 var fs = require('fs')
 
 function registrar(req,res){
@@ -65,7 +66,7 @@ function registrar(req,res){
 function listar (req,res){
     var titulo = req.params['titulo'];
 
-    Producto.find({titulo: new RegExp(titulo,'i')},(err,productos_listado)=>{
+    Producto.find({titulo: new RegExp(titulo,'i')}).populate('idCategoria').exec((err,productos_listado)=>{
         if (err){
             res.status(500).send({message: 'Error en el servidor'});
         }else{
@@ -75,7 +76,7 @@ function listar (req,res){
                 res.status(403).send({message: 'no hay ningun registro con ese titulo'})
             }
         }
-    })
+    });
 }
 
 function editar(req,res){
@@ -193,6 +194,19 @@ function update_stock(req,res){
     })
 
 }
+
+function get_img (req,res){
+    var img = req.params['img'];
+
+    if (img != "null"){
+        let path_img = './uploads/productos/'+img;
+        res.status(200).sendFile(path.resolve(path_img));
+    }else{
+        let path_img = './uploads/productos/default.jpg'
+        res.status(200).sendFile(path.resolve(path_img));
+    }
+}
+
 module.exports = {
     registrar,
     listar,
@@ -200,4 +214,5 @@ module.exports = {
     obtener_producto,
     eliminar,
     update_stock,
+    get_img,
 }

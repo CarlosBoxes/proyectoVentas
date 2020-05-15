@@ -5,7 +5,8 @@ var ClienteSchema = Schema({
     nombres: String,
     dni: String,
     correo: String,
-    puntos: Number
+    puntos: Number,
+    createAt: {type: Date, default: Date.now}
 });
 
 module.exports= mongoose.model('cliente', ClienteSchema);
