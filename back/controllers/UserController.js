@@ -55,7 +55,7 @@ function login (req,res){
                             });
                         }
                     }else{
-                        res.status(403).send({messa: 'Las contraseñas o correo no coinciden.'});
+                        res.status(403).send({message: 'Las contraseñas o correo no coinciden.'});
                     }
                 });
             }else{

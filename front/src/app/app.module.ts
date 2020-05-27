@@ -4,13 +4,36 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
+import { LoginComponent } from './components/login/login.component';
+
+import { routing } from "./app.routing";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProductoIndexComponent } from './components/productos/producto-index/producto-index.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ProductoCreateComponent } from './components/productos/producto-create/producto-create.component';
+import { ProductoEditComponent } from './components/productos/producto-edit/producto-edit.component';
+
+
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    ProductoIndexComponent,
+    SidebarComponent,
+    ProductoCreateComponent,
+    ProductoEditComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent]
