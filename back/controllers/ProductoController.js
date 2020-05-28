@@ -83,18 +83,21 @@ function editar(req,res){
     var id = req.params['id'];
     var img = req.params['img'];
     var data = req.body;
-
-    if (req.files)
+    console.log('ACA VA');
+    console.log(img);
+    if (req.files.imagen)
     {
+
+        if (img || img != null || img != undefined) {
         fs.unlink('./uploads/productos/'+img,(err)=>{
             if(err){
                 throw err;
             }
         }
-        )
+        )}
         var imagen_path = req.files.imagen.path;
         var name = imagen_path.split('\\');
-        var name_imagen = name[2]
+        var name_imagen = name[2];
         Producto.findByIdAndUpdate({_id: id},{
         titulo: data.titulo,
         descripcion: data.descripcion,
@@ -105,7 +108,8 @@ function editar(req,res){
         idCategoria: data.idCategoria,
         puntos: data.puntos
     },(err,producto_edited)=>{
-        if (err){
+        if (err){            
+            
             res.status(500).send({message: 'Error en el servidor'});
         }else{
             if(producto_edited){

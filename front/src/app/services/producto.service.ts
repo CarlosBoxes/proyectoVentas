@@ -49,6 +49,21 @@ export class ProductoService {
 
     return this._http.get(this.url+'producto/'+id,{headers: headers});
   }
+
+  update_producto(data):Observable<any> {
+    const fd = new FormData();
+
+    fd.append('titulo', data.titulo);
+    fd.append('imagen', data.imagen);
+    fd.append('idCategoria', data.idCategoria);
+    fd.append('descripcion', data.descripcion);
+    fd.append('precio_compra', data.precio_compra);
+    fd.append('precio_venta', data.precio_venta);
+    fd.append('stock', data.stock);
+    fd.append('puntos', data.puntos);
+
+    return this._http.put(this.url+'producto/editar/'+data._id+'/'+data.img_name,fd);
+  }
   
   
 }

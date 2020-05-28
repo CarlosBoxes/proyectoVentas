@@ -70,8 +70,25 @@ export class ProductoEditComponent implements OnInit {
   onSubmit(productoForm){
     if (productoForm.valid)
     { 
-          console.log(productoForm.value);
-          console.log(this.file)
+          this._productoService.update_producto({
+            _id: this.id,
+            titulo: productoForm.value.titulo,
+            descripcion: productoForm.value.descripcion,
+            imagen: this.file,
+            idCategoria: productoForm.value.idCategoria,
+            precio_compra: productoForm.value.precio_compra,
+            precio_venta: productoForm.value.precio_venta,
+            stock: productoForm.value.stock,
+            puntos: productoForm.value.puntos,
+            img_name: this.producto.imagen,}
+          ).subscribe(
+            response => {
+              console.log(response);
+              this.success_message = 'El producto se actualizo correctamente';
+            },error => {
+              this.error_message = 'Complete correctamente el formulario';
+            }
+          );
     }else{
       this.error_message = 'Complete correctamente el formulario';
     }
@@ -85,9 +102,6 @@ export class ProductoEditComponent implements OnInit {
       reader.onload = e => this.imgSelect = reader.result;
 
       reader.readAsDataURL (this.file);
-
-
-
     }
   }
 
