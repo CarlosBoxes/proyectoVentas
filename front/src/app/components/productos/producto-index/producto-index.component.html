@@ -37,24 +37,27 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a [routerLink]="['/dashboard']">Dashboard</a>
-                                <a>Productos</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a [routerLink]="['/productos']">Productos</a>
                             </li>
                         </ol>
                     </nav>
                     <p class="header-subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, iste!.</p>
                 </div>
     
-                <div class="row">
-                    <div  class="col-12 col-xl-12">
+                <div class="row"  >
+                    <div  class="col-12 col-xl-12" *ngIf="success_message">
                         <div class="alert alert-success alert-outline alert-dismissible" role="alert">
                             <div class="alert-icon">
                                 <i class="far fa-fw fa-bell"></i>
                             </div>
+
                             <div class="alert-message">
-                                <strong>Hello there!</strong> A simple success alert—check it out!
+                                <strong>Exito</strong> {{success_message}}
                             </div>
     
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close_alert()">
                             <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -99,7 +102,7 @@
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
-                                <tbody *ngFor="let item of productos" >
+                                <tbody *ngFor="let item of productos | paginate: { itemsPerPage: 15, currentPage: p}; let idx= index" >
                                         <td>
                                             <img [src]="url+'/producto/img/'+ item.imagen" width="48" height="48" class="rounded-circle mr-2" alt="Avatar"> {{item.titulo}}
                                         </td>
@@ -113,16 +116,45 @@
                                                     </button>
                                                     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 31px, 0px);">
                                                         <a class="dropdown-item" [routerLink]="['/productos/editar/',item._id]">Editar</a>
+                                                        <a class="dropdown-item" (click)="eliminar(item._id)">Eliminar</a>
+                                                        <a class="dropdown-item" data-toggle="modal" [attr.data-target]="'#modal-stock-'+idx" (click)="get_producto_id (item._id)">Editar Stock</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
+                                        <!--MODAL EDITAR STOCK DE PRODUCTOS-->
+                                        <div class="modal fade" [attr.id]="'modal-stock-'+idx"tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                                            <form #stockForm="ngForm" (ngSubmit)="aumentar_stock(stockForm)">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Aumentar Scock de: {{item.titulo}}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body m-3">
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control form-control-lg" placeholder="Ingrese stock"  name="producto_stock" ngModel required #producto_stock="ngModel" required> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!--MODAL EDITAR STOCK PRODUCTOS-->
+
+                                    
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div>                    
                     <div class="col-12 col-xl-12">
-                        PAGINACIÓN AQUÍ
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     </div>
                 </div>
     
@@ -187,6 +219,8 @@
                 </div>
                 <!--MODAL LISTAR CATEGORIA-->
                 
+
+
     
             </div>
         </main>

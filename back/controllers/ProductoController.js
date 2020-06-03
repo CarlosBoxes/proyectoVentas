@@ -104,7 +104,6 @@ function editar(req,res){
         imagen: name_imagen,
         precio_compra: data.precio_compra,
         precio_venta: data.precio_venta,
-        stock: data.stock,
         idCategoria: data.idCategoria,
         puntos: data.puntos
     },(err,producto_edited)=>{
@@ -125,7 +124,6 @@ function editar(req,res){
             descripcion: data.descripcion,
             precio_compra: data.precio_compra,
             precio_venta: data.precio_venta,
-            stock: data.stock,
             idCategoria: data.idCategoria,
             puntos: data.puntos
         },(err,producto_edited)=>{

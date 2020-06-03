@@ -15,7 +15,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ProductoCreateComponent } from './components/productos/producto-create/producto-create.component';
 import { ProductoEditComponent } from './components/productos/producto-edit/producto-edit.component';
 
-
+import {NgxPaginationModule} from 'ngx-pagination';
+import { ClienteIndexComponent } from './components/clientes/cliente-index/cliente-index.component';
+import { ClienteCreateComponent } from './components/clientes/cliente-create/cliente-create.component';
 
 
 @NgModule({
@@ -26,14 +28,17 @@ import { ProductoEditComponent } from './components/productos/producto-edit/prod
     ProductoIndexComponent,
     SidebarComponent,
     ProductoCreateComponent,
-    ProductoEditComponent
+    ProductoEditComponent,
+    ClienteIndexComponent,
+    ClienteCreateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    routing
+    routing,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

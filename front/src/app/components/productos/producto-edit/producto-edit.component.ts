@@ -78,7 +78,6 @@ export class ProductoEditComponent implements OnInit {
             idCategoria: productoForm.value.idCategoria,
             precio_compra: productoForm.value.precio_compra,
             precio_venta: productoForm.value.precio_venta,
-            stock: productoForm.value.stock,
             puntos: productoForm.value.puntos,
             img_name: this.producto.imagen,}
           ).subscribe(

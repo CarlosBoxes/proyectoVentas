@@ -59,7 +59,6 @@ export class ProductoService {
     fd.append('descripcion', data.descripcion);
     fd.append('precio_compra', data.precio_compra);
     fd.append('precio_venta', data.precio_venta);
-    fd.append('stock', data.stock);
     fd.append('puntos', data.puntos);
 
     return this._http.put(this.url+'producto/editar/'+data._id+'/'+data.img_name,fd);
@@ -71,4 +70,15 @@ export class ProductoService {
     return this._http.post(this.url+'/categoria/registrar/',data,{headers: headers});
   }
 
+  delete_producto(id):Observable<any> {
+    let headers = new HttpHeaders ().set('Content-Type','application/json');
+
+    return this._http.delete(this.url+'producto/'+id,{headers: headers});
+  }
+
+  update_stock_producto(data):Observable<any> {
+    let headers = new HttpHeaders ().set('Content-Type','application/json');
+
+    return this._http.put(this.url+'/producto/stock/'+data._id,data,{headers: headers});
+  }
 }

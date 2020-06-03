@@ -6,6 +6,7 @@ function registrar (req,res) {
 
     cliente.nombres=data.nombres;
     cliente.correo=data.correo;
+    cliente.dni=data.dni;
     cliente.puntos=10;
 
 
@@ -26,7 +27,7 @@ function editar (req,res){
     let id = req.params['id'];
     let data = req.body
 
-    Cliente.findByIdAndUpdate({_id: id}, {nombres: data.nombres, correo: data.correo},(err,cliente_edited)=>{
+    Cliente.findByIdAndUpdate({_id: id}, {nombres: data.nombres,dni: data.dni, correo: data.correo},(err,cliente_edited)=>{
         if (err){
             res.status(500).send({error: 'Error en el servidor.'});
         }else{
@@ -57,8 +58,19 @@ function eliminar (req,res){
     })
 }
 
+function listar (req,res){
+    Cliente.find((err,clientes_data)=>{
+        if(clientes_data){
+            res.status(200).send({clientes: clientes_data});
+        }else{
+            res.status(403).send({message: 'No hay clientes en la Base de datos'})
+        }
+    })
+}
+
 module.exports = {
     registrar,
     editar,
     eliminar,
+    listar,
 }
