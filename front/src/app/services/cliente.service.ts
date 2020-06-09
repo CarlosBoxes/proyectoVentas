@@ -22,4 +22,33 @@ export class ClienteService {
 
     return this._http.get(this.url+'clientes/',{headers: headers});
   }
+
+  
+
+  registrar_cliente(data):Observable<any> {
+    let headers = new HttpHeaders ().set('Content-Type','application/json');
+
+    return this._http.post(this.url+'/cliente/registrar',data,{headers: headers});
+  }
+
+  get_cliente(id):Observable<any> {
+    let headers = new HttpHeaders ().set('Content-Type','application/json');
+
+    return this._http.get(this.url+'cliente/'+id,{headers: headers});
+  }
+
+
+  editar_cliente(data):Observable<any> {
+    let headers = new HttpHeaders ().set('Content-Type','application/json');
+
+    return this._http.put(this.url+'/cliente/editar/'+data._id,data,{headers: headers});
+  }
+
+  delete_cliente(id):Observable<any> {
+    let headers = new HttpHeaders ().set('Content-Type','application/json');
+
+    return this._http.delete(this.url+'cliente/eliminar/'+id,{headers: headers});
+  }
+
+
 }

@@ -42,7 +42,7 @@
                                 <a [routerLink]="['/clientes']">Clientes</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a [routerLink]="['/cliente/registrar']">Nuevo Cliente</a>
+                                <a [routerLink]="['/cliente/editar/'+id]">Editar Cliente</a>
                             </li>
                         </ol>
                     </nav>                    
@@ -68,13 +68,11 @@
                         <form #clienteForm="ngForm" (ngSubmit)="onSubmit(clienteForm)">
                             <div class="card">
                                 <div class="card-header">                                
-                                    <h5 class="card-title">Nuevo Cliente</h5>
+                                    <h5 class="card-title">Datos del  Cliente</h5>
                                     
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-
-
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>
@@ -103,7 +101,7 @@
                                 </div>                            
                                 <div class="card-footer">
                                         <button type="submit" class="btn btn-success">
-                                            Registrar Cliente
+                                            Actualizar Cliente
                                         </button>
                                 </div>
                             </div>
@@ -116,5 +114,6 @@
         
     </div>
 </div>
+
 
 

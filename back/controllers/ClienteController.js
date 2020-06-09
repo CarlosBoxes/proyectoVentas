@@ -68,9 +68,23 @@ function listar (req,res){
     })
 }
 
+function get_cliente(req,res){
+    var id = req.params['id'];
+    Cliente.findById(id,(err,cliente_data)=> {
+        if (cliente_data){
+            res.status(200).send({cliente: cliente_data});
+        }else{
+            res.status(403).send({message: 'No existe ese cliente'});
+        }
+    }
+    )
+
+}
+
 module.exports = {
     registrar,
     editar,
     eliminar,
     listar,
+    get_cliente,
 }

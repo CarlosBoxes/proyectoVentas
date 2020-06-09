@@ -53,5 +53,18 @@ export class UserService {
     return this.identity;
   }
 
+  get_usuarios():Observable<any> {
+    let headers = new HttpHeaders ().set('Content-Type','application/json');
+
+    return this._http.get(this.url+'usuarios/',{headers: headers});
+  }
+
+  
+  registrar_usuario(data):Observable<any> {
+    let headers = new HttpHeaders ().set('Content-Type','application/json');
+
+    return this._http.post(this.url+'/usuario/registrar',data,{headers: headers});
+  }
+
 }
 

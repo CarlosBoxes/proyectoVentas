@@ -31,7 +31,7 @@
     
                 <div class="header">
                     <h1 class="header-title">
-                        Mis Clientes
+                        Nuevo Usuario
                     </h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -39,10 +39,10 @@
                                 <a [routerLink]="['/dashboard']">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a [routerLink]="['/clientes']">Clientes</a>
+                                <a [routerLink]="['/usuarios']">Usuarios</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a [routerLink]="['/cliente/registrar']">Nuevo Cliente</a>
+                                <a [routerLink]="['/usuario/registrar']">Nuevo Usuario</a>
                             </li>
                         </ol>
                     </nav>                    
@@ -65,10 +65,10 @@
                     </div>
 
                     <div class="col-12 col-xl-12">
-                        <form #clienteForm="ngForm" (ngSubmit)="onSubmit(clienteForm)">
+                        <form #usuarioForm="ngForm" (ngSubmit)="onSubmit(usuarioForm)">
                             <div class="card">
                                 <div class="card-header">                                
-                                    <h5 class="card-title">Nuevo Cliente</h5>
+                                    <h5 class="card-title">Nuevo Usuario</h5>
                                     
                                 </div>
                                 <div class="card-body">
@@ -78,9 +78,17 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>
-                                                    <b>Nombres del Cliente</b>
+                                                    <b>Nombres del Usuario</b>
                                                 </label>
-                                                <input type="text" class="form-control" name="nombres" [(ngModel)]="cliente.nombres" required #nombres="ngModel" placeholder="Ingrese el nombre">
+                                                <input type="text" class="form-control" name="nombres" [(ngModel)]="usuario.nombres" required #nombres="ngModel" placeholder="Ingrese los nombres">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>
+                                                    <b>Apellidos del Usuario</b>
+                                                </label>
+                                                <input type="text" class="form-control" name="apellidos" [(ngModel)]="usuario.apellidos" required #apellidos="ngModel" placeholder="Ingrese los apellidos">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
@@ -88,15 +96,15 @@
                                                 <label>
                                                     <b>Correo electrónico</b>
                                                 </label>
-                                                <input type="mail" class="form-control" name="correo" [(ngModel)]="cliente.correo"  #correo="ngModel" placeholder="Ingrese su correo" required>
+                                                <input type="mail" class="form-control" name="email" [(ngModel)]="usuario.email"  #email="ngModel" placeholder="Ingrese su email" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>
-                                                    <b>DNI</b>
+                                                    <b>Password</b>
                                                 </label>
-                                                <input type="number" class="form-control" name="dni" [(ngModel)]="cliente.dni" required #dni="ngModel" placeholder="Ingrese el DNI">
+                                                <input type="password" class="form-control" name="password" [(ngModel)]="usuario.password" required #password="ngModel" placeholder="Ingrese el password">
                                             </div>
                                         </div>
                                     </div>

@@ -18,6 +18,10 @@ import { ProductoEditComponent } from './components/productos/producto-edit/prod
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ClienteIndexComponent } from './components/clientes/cliente-index/cliente-index.component';
 import { ClienteCreateComponent } from './components/clientes/cliente-create/cliente-create.component';
+import { ClienteEditComponent } from './components/clientes/cliente-edit/cliente-edit.component';
+import { UsersIndexComponent } from './components/users/users-index/users-index.component';
+import { UsersEditComponent } from './components/users/users-edit/users-edit.component';
+import { UsersCreateComponent } from './components/users/users-create/users-create.component';
 
 
 @NgModule({
@@ -30,7 +34,11 @@ import { ClienteCreateComponent } from './components/clientes/cliente-create/cli
     ProductoCreateComponent,
     ProductoEditComponent,
     ClienteIndexComponent,
-    ClienteCreateComponent
+    ClienteCreateComponent,
+    ClienteEditComponent,
+    UsersIndexComponent,
+    UsersEditComponent,
+    UsersCreateComponent
   ],
   imports: [
     BrowserModule,

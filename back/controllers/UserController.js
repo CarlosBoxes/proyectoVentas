@@ -65,8 +65,19 @@ function login (req,res){
     })
 }
 
+function get_usuarios (req,res){
+    User.find((err,usuarios_data)=>{
+        if(usuarios_data){
+            res.status(200).send({usuarios: usuarios_data});
+        }else{
+            res.status(403).send({message: 'No hay clientes en la Base de datos'})
+        }
+    })
+}
+
 module.exports = {
     registrar,
-    login
+    login,
+    get_usuarios
 }
 
