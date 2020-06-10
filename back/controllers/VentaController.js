@@ -63,7 +63,33 @@ function datos_venta (req,res){
     });
 }
 
+function listar_ventas (req,res){
+    Venta.find().populate('idcliente').exec((err,data_Ventas)=> {
+        if(data_Ventas){
+            res.status(200).send({ventas: data_Ventas})
+        }else {
+            res.status(404).send({message: "NO hay ningun registro de ventas"});
+        }
+    })
+
+}
+
+function detalles_venta (req,res){
+    var id = req.params['id'];
+
+    DetalleVenta.find({venta: id}).populate('idproducto').exec((err,data_detalles) => {
+        if (data_detalles){
+            res.status(200).send({detalles: data_detalles})
+        }else{
+            res.status(404).send({message: "NO hay ningun registro de detalles"});
+        }
+    }
+    );
+}
+
 module.exports = {
     registrar,
     datos_venta,
+    listar_ventas,
+    detalles_venta,
 }

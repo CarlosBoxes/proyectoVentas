@@ -73,8 +73,6 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-
-
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>
@@ -102,7 +100,19 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>
-                                                    <b>Password</b>
+                                                    <b>Rol</b>
+                                                </label>
+                                                <select class="form-control" name="role" [(ngModel)]="usuario.role" required #role="ngModel" >
+                                                    <option value="">SELECCIONAR</option>
+                                                    <option value="ADMIN">Administrador</option>
+                                                    <option value="SELLER">Vendedor</option>
+                                                </select>                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>
+                                                    <b>Contraseña</b>
                                                 </label>
                                                 <input type="password" class="form-control" name="password" [(ngModel)]="usuario.password" required #password="ngModel" placeholder="Ingrese el password">
                                             </div>

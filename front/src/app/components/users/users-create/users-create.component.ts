@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../../../models/user'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-create',
@@ -11,14 +12,20 @@ export class UsersCreateComponent implements OnInit {
 
   public usuario;
   public success_message = '';
+  public identity;
 
   constructor(
     private _UsuarioService: UserService,
+    private _Route: Router,
   ) { 
     this.usuario = new User('','','','','');
+    this.identity = this._UsuarioService.getIdentity();
   }
 
   ngOnInit(): void {
+    if(this.identity.role != 'ADMIN'){
+      this._Route.navigate(['dashboard']);
+    }
   }
 
   success_alert(){
@@ -26,7 +33,7 @@ export class UsersCreateComponent implements OnInit {
   }
 
   onSubmit(usuarioForm){
-    if(usuarioForm.valid){
+     if(usuarioForm.valid){
       this._UsuarioService.registrar_usuario({
         nombres: usuarioForm.value.nombres,
         apellidos: usuarioForm.value.apellidos,
@@ -40,8 +47,9 @@ export class UsersCreateComponent implements OnInit {
         }, error => {
 
         }
-      );
+      ); 
     }
+
   }
 
 }

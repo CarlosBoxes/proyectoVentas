@@ -63,7 +63,26 @@ export class UserService {
   registrar_usuario(data):Observable<any> {
     let headers = new HttpHeaders ().set('Content-Type','application/json');
 
-    return this._http.post(this.url+'/usuario/registrar',data,{headers: headers});
+
+    return this._http.post(this.url+'registrar/',data,{headers: headers});
+  }
+
+  get_usuario(id):Observable<any> {
+    let headers = new HttpHeaders ().set('Content-Type','application/json');
+
+    return this._http.get(this.url+'usuario/'+id,{headers: headers});
+  }
+
+  editar_usuario(data): Observable<any> {
+    let headers = new HttpHeaders ().set('Content-Type','application/json');
+    
+    return this._http.put(this.url+'usuario/editar/'+data._id,data,{headers: headers});
+  }
+
+  delete_usuarios(id): Observable<any> {
+    let headers = new HttpHeaders ().set('Content-Type','application/json');
+
+    return this._http.delete(this.url+'usuario/eliminar/'+id,{headers: headers});
   }
 
 }
