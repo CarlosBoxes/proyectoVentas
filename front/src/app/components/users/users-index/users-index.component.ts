@@ -33,7 +33,7 @@ export class UsersIndexComponent implements OnInit {
     }
   );
   }else{
-    this._Route.navigate(['dashboard']);
+    this._Route.navigate(['ventas']);
   }
   }
 

@@ -46,17 +46,19 @@ function registrar (req,res){
 
 function datos_venta (req,res){
     var id = req.params['id'];
-
-    Venta.findById(id,(err,data_venta)=>{
+    Venta.findById(id).populate('idcliente').populate('iduser').exec((err,data_venta)=>{
+        
         if (data_venta){
-            DetalleVenta.find({venta: id},(err,data_detalleventa)=>{
+            DetalleVenta.find({venta: id}).populate('idproducto').exec((err,data_detalleventa)=>{
                 if(data_detalleventa){
-                    res.status(200).send({
-                        venta: data_venta,
-                        detalles: data_detalleventa
+                    res.status(200).send({data: 
+                        {
+                            venta: data_venta,
+                            detalles: data_detalleventa
+                        }
                     })
                 }
-            })
+            });
         }else{
             
         }
@@ -64,7 +66,7 @@ function datos_venta (req,res){
 }
 
 function listar_ventas (req,res){
-    Venta.find().populate('idcliente').exec((err,data_Ventas)=> {
+    Venta.find().populate('idcliente').populate('iduser').exec((err,data_Ventas)=> {
         if(data_Ventas){
             res.status(200).send({ventas: data_Ventas})
         }else {

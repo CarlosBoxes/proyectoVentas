@@ -11,6 +11,10 @@ import { ClienteEditComponent } from './components/clientes/cliente-edit/cliente
 import { UsersIndexComponent } from './components/users/users-index/users-index.component';
 import { UsersEditComponent } from './components/users/users-edit/users-edit.component';
 import { UsersCreateComponent } from './components/users/users-create/users-create.component';
+import { VentaIndexComponent } from './components/ventas/venta-index/venta-index.component';
+import { VentaCreateComponent } from './components/ventas/venta-create/venta-create.component';
+import { VentaDetalleComponent } from './components/ventas/venta-detalle/venta-detalle.component';
+
 
 const appRoute: Routes = [
     {path: '', component: LoginComponent},
@@ -24,6 +28,9 @@ const appRoute: Routes = [
     {path: 'usuarios', component: UsersIndexComponent},
     {path: 'usuario/registrar', component: UsersCreateComponent},
     {path: 'usuario/editar/:id', component: UsersEditComponent},
+    {path: 'ventas', component: VentaIndexComponent},
+    {path: 'venta/registrar', component: VentaCreateComponent},
+    {path: 'venta/:id', component: VentaDetalleComponent}
 ]
 
 export const appRoutingProviders: any[] = []

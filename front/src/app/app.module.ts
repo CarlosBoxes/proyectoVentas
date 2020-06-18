@@ -22,6 +22,9 @@ import { ClienteEditComponent } from './components/clientes/cliente-edit/cliente
 import { UsersIndexComponent } from './components/users/users-index/users-index.component';
 import { UsersEditComponent } from './components/users/users-edit/users-edit.component';
 import { UsersCreateComponent } from './components/users/users-create/users-create.component';
+import { VentaIndexComponent } from './components/ventas/venta-index/venta-index.component';
+import { VentaCreateComponent } from './components/ventas/venta-create/venta-create.component';
+import { VentaDetalleComponent } from './components/ventas/venta-detalle/venta-detalle.component';
 
 
 @NgModule({
@@ -38,7 +41,10 @@ import { UsersCreateComponent } from './components/users/users-create/users-crea
     ClienteEditComponent,
     UsersIndexComponent,
     UsersEditComponent,
-    UsersCreateComponent
+    UsersCreateComponent,
+    VentaIndexComponent,
+    VentaCreateComponent,
+    VentaDetalleComponent
   ],
   imports: [
     BrowserModule,
