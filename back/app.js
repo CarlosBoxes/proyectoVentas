@@ -15,7 +15,7 @@ var cliente_routes = require('./routes/cliente');
 var venta_routes = require('./routes/venta')
 
 
-mongoose.connect('mongodb://localhost:27017/sistema',{useUnifiedTopology: true, useNewUrlParser: true},(err,res)=> {
+mongoose.connect('mongodb+srv://CarlosCajas:Ghost167@clusterprueba-uqyts.mongodb.net/sistema?retryWrites=true&w=majority',{useUnifiedTopology: true, useNewUrlParser: true},(err,res)=> {
     if (err){
         throw err;
     }else{
